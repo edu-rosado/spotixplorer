@@ -5,9 +5,11 @@ import { REDIRECT_URI } from '../App'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { getExpirationTime } from '../common'
 
-export default function ClientAuthRedirect({location}) {
+export default function Dashboard({location}) {
 
     const [tokenData, setTokenData] = useLocalStorage("token-data",null)
+    const [playlistSet, setPlaylistSet] = useLocalStorage("playlist-set",[])
+
     const [refreshDone, setRefreshDone] = useState(false)
 
     // Get access and refresh tokens
@@ -67,23 +69,84 @@ export default function ClientAuthRedirect({location}) {
             }
             return
         }
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${tokenData.access_token}`
-            }
-        }
+        const config = {headers: {
+            "Authorization": `Bearer ${tokenData.access_token}`
+        }}
+        getPlaylistsFromApi(config, 0)
+
+    }
+
+    const getPlaylistsFromApi = (config, offset) => {
+        setPlaylistSet([])
         Axios.get(
-            "https://api.spotify.com/v1/me/playlists",
+            `https://api.spotify.com/v1/me/playlists?limit=50&offset=${offset}`,
             config
             )
             .then(res => {
-                console.log(res.data)
+                Promise.all(
+                    res.data.items
+                        .map( async playlist => {
+                            const tracks = await getTracks(
+                                playlist.tracks.href,
+                                config,
+                                0
+                            )
+                            return {
+                                name: playlist.name,
+                                images: playlist.images,
+                                tracks,
+                            }
+                        })
+                ).then(formattedPlaylist => {
+                    setPlaylistSet(prev => [
+                        ...prev, 
+                        ...formattedPlaylist,
+                    ])
+                })
+                const newOffset = offset + 50
+                if (newOffset < res.total){
+                    getPlaylistsFromApi(config, newOffset)
+                }
+                
             })
             .catch(error => {
-                console.log(error.response.status)
+                console.log(error)
                 console.log(error.response.data)
             })
+    }
 
+    const getTracks = (href,config, offset) =>{
+        return Axios.get(
+            `${href}?offset=${offset}`,
+            config
+        )
+            .then( async res => {
+                const tracks = res.data.items
+                    .map(track => ({
+                    added_at: track.added_at,
+                    album: track.track.album.name,
+                    release_date: track.track.album.release_date,
+                    artists: track.track.artists
+                        .map(artist => artist.name),
+                    duration_ms: track.track.duration_ms,
+                    name: track.track.name,
+                    href: track.track.href
+                }))
+                const newOffset = offset + 100
+                if (newOffset < res.data.total){
+                    return [
+                        ...tracks,
+                        ... await getTracks(href, config, newOffset)
+                    ]
+                } else{
+                    return tracks
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                console.log(error.response.data)
+                return error
+            })
     }
 
     const handleRefresh = () => {

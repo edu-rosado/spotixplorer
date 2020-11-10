@@ -11,6 +11,7 @@ export default function Landing() {
         `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`)
         window.location = url;
     }
+
     return (
         <div>
             <button onClick={handleAuth}>Authenticate</button>

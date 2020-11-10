@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './scss/index.scss';
-import ClientAuthRedirect from './components/ClientAuthRedirect';
+import Dashboard from './components/Dashboard';
 import Landing from './components/Landing';
 
 export const STORAGE_KEY = "spotixplore"
@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Landing}/>
-          <Route path="/auth-callback" component={ClientAuthRedirect}/>
+          <Route path="/auth-callback" component={Dashboard}/>
         </Switch>
       </Router>
     </div>
