@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { STORAGE_KEY } from '../App'
+import { LOCAL_PREFIX } from '../App'
 
 export default function useLocalStorage(
     itemKey, defaultValue
 ) {
-    const key = `${STORAGE_KEY}-${itemKey}`
+    const key = `${LOCAL_PREFIX}-${itemKey}`
 
     const [item, setItem] = useState(() => {
         

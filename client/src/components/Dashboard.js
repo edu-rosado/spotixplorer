@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import qs from 'qs'
-import { REDIRECT_URI } from '../App'
+import { PLAYLIST_SET_LOCAL_KEY, REDIRECT_URI, TOKEN_DATA_LOCAL_KEY } from '../App'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { getExpirationTime } from '../common'
 
 export default function Dashboard({location}) {
 
-    const [tokenData, setTokenData] = useLocalStorage("token-data",null)
-    const [playlistSet, setPlaylistSet] = useLocalStorage("playlist-set",[])
+    const [tokenData, setTokenData] = useLocalStorage(
+        TOKEN_DATA_LOCAL_KEY,null
+    )
+    const [playlistSet, setPlaylistSet] = useLocalStorage(PLAYLIST_SET_LOCAL_KEY,[])
 
     const [refreshDone, setRefreshDone] = useState(false)
 
@@ -78,6 +79,7 @@ export default function Dashboard({location}) {
 
     const getPlaylistsFromApi = (config, offset) => {
         setPlaylistSet([])
+        console.log(config)
         Axios.get(
             `https://api.spotify.com/v1/me/playlists?limit=50&offset=${offset}`,
             config
