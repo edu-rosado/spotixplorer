@@ -4,19 +4,20 @@ import { PLAYLIST_SET_LOCAL_KEY, REDIRECT_URI, TOKEN_DATA_LOCAL_KEY } from '../.
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { getExpirationTime } from '../../common'
 import { usePlaylists } from '../../context/SpotifyDataContext'
+import Sidebar from './Sidebar'
+import DataSection from './dataSection/DataSection'
 
 export default function Dashboard({location}) {
 
     const [tokenData, setTokenData] = useLocalStorage(
         TOKEN_DATA_LOCAL_KEY,null
     )
-
     const [refreshDone, setRefreshDone] = useState(false)
     const [mustRefreshSpotifyData, setMustRefreshSpotifyData] = useState(false)
 
     const [playlists, getPlaylists] = usePlaylists()
 
-    // on mount: Get tokens and users data
+    // on mount: Get tokens and spotify data
     useEffect(() => {
         if (tokenData !== null){
             return // We already have it
@@ -45,7 +46,6 @@ export default function Dashboard({location}) {
                         ...res.data,
                         expiration_time,
                     })
-                    console.log(playlists.length)
                     if (playlists.length == 0){
                         // At mount, only get users data 
                         // if local storage is empty
@@ -74,7 +74,7 @@ export default function Dashboard({location}) {
         }
         }, [tokenData, mustRefreshSpotifyData])
     
-    // Get the users data
+    // Get spotify data
     const refreshSpotifyData = () => {
         setMustRefreshSpotifyData(false)
         if ((new Date()).getTime() >= tokenData.expiration_time){
@@ -88,6 +88,7 @@ export default function Dashboard({location}) {
             // will be called again (with useEffect)
             return
         }
+        console.log("Calling spotify API")
         getPlaylists(tokenData.access_token)
     } 
 
@@ -118,10 +119,9 @@ export default function Dashboard({location}) {
     }
     
     return (
-        <div>
-            <button 
-                onClick={refreshSpotifyData}
-            >Sync data with Spotify</button>
+        <div className="app">
+            <Sidebar refreshSpotifyData={refreshSpotifyData}/>
+            <DataSection />
         </div>
     )
 }

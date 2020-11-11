@@ -19,7 +19,7 @@ export const TOKEN_DATA_LOCAL_KEY = "token-data"
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Router>
         <Switch>
           <Route exact path="/" component={Landing}/>
@@ -28,7 +28,7 @@ function App() {
           </SpotifyDataProvider>
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 

@@ -1,3 +1,17 @@
-body {
-  background-color: rgb(212, 196, 144);
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
+
+.app {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+}
+
+@import "./sidebar";
+@import "./dataSection";
