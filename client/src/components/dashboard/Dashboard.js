@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import { PLAYLIST_SET_LOCAL_KEY, REDIRECT_URI, TOKEN_DATA_LOCAL_KEY } from '../../App'
+import { REDIRECT_URI, TOKEN_DATA_LOCAL_KEY } from '../../App'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { getExpirationTime } from '../../common'
 import { usePlaylists } from '../../context/SpotifyDataContext'
-import Sidebar from './Sidebar'
+import Sidebar from './sidebar/Sidebar'
 import DataSection from './dataSection/DataSection'
 
 export default function Dashboard({location}) {

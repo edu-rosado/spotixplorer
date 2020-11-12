@@ -37,7 +37,7 @@
         flex-grow: 1;
         padding: 1rem;
         background-color: rgba($secondary, 0.5);
-        color: white;
+        color: beige;
         border: none;
         border-bottom: 2px solid rgba($secondary-light, 0.5);
         cursor: pointer;
@@ -61,18 +61,18 @@
   .main-menu {
     padding: 1rem 0;
     height: 100%;
-    .item-l1 {
+    .l1 {
       border-top: 2px solid $secondary-dark;
-      h2 {
+      .item-l1 {
+        font-size: 1.4rem;
         padding: 0.3rem 0.6rem;
         background-color: rgba($secondary, 0.5);
         color: beige;
-        &.has-action {
-          cursor: pointer;
-          &:hover {
-            background-color: $secondary-dark;
-            color: beige;
-          }
+        cursor: pointer;
+        &:hover,
+        &.active.has-action {
+          background-color: $secondary-dark;
+          color: beige;
         }
       }
       .item-l2 {
@@ -80,7 +80,8 @@
         background-color: rgba($secondary-light, 0.7);
         border-top: 1px solid $secondary-light;
         cursor: pointer;
-        &:hover {
+        &:hover,
+        &.active {
           background-color: $secondary-dark;
           color: beige;
         }

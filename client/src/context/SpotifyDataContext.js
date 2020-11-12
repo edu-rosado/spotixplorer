@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { useContext } from 'react'
 import useLocalStorage from '../hooks/useLocalStorage'
 
-export const PLAYLIST_SET_LOCAL_KEY = "playlist-set"
+export const LOCAL_KEY_PLAYLIST_SET = "LOCAL_KEY_PLAYLIST_SET"
 
 const PlaylistContext = React.createContext()
 
@@ -15,7 +15,7 @@ export const SpotifyDataProvider = ({children}) => {
     //////////////// PLAYLISTS ////////////////////
 
     const [playlists, setPlaylists] = useLocalStorage(
-        PLAYLIST_SET_LOCAL_KEY, []
+        LOCAL_KEY_PLAYLIST_SET, []
     )
 
     // Exposed method to get playlists from Spotify API
