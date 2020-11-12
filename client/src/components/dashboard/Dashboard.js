@@ -120,7 +120,7 @@ export default function Dashboard({location}) {
     
     return (
         <div className="app">
-            <Sidebar refreshSpotifyData={refreshSpotifyData}/>
+            <Sidebar refreshSpotifyData={()=>{}}/>
             <DataSection />
         </div>
     )

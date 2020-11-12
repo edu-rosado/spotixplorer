@@ -60,7 +60,7 @@
 
   .main-menu {
     padding: 1rem 0;
-    height: 100%;
+    flex-grow: 1;
     .l1 {
       border-top: 2px solid $secondary-dark;
       .item-l1 {

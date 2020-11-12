@@ -2,7 +2,7 @@ import Axios from 'axios'
 import React, { useContext } from 'react'
 import useLocalStorage from '../hooks/useLocalStorage'
 
-export const LOCAL_KEY_PLAYLIST_SET = "LOCAL_KEY_PLAYLIST_SET"
+export const LOCAL_KEY_PLAYLIST_SET = "playlist-set"
 
 const PlaylistContext = React.createContext()
 
