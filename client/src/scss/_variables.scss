@@ -7,3 +7,19 @@ $primary-dark: #7da453;
 $secondary: #009688;
 $secondary-light: #52c7b8;
 $secondary-dark: #00675b;
+
+@function css-function($function, $values...) {
+  @return $function + unquote("(") + $values + unquote(")");
+}
+
+@function css-min($values...) {
+  @return css-function(min, $values);
+}
+
+@function css-max($values...) {
+  @return css-function(max, $values);
+}
+
+@function css-clamp($values...) {
+  @return css-function(clamp, $values);
+}

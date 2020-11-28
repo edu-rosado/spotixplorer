@@ -8,7 +8,7 @@ const ARTISTS_TITLE = "Explore: Artists"
 const SONGS_TITLE = "Explore: Songs"
 
 const PLAYLIST_HEADERS = ["Name", "Num. of songs",
- "Total duration", "First addition", "Last addition"]
+ "Total duration (h:m:s)", "First addition", "Last addition"]
 
 export default function BasicTable() {
 
@@ -25,8 +25,12 @@ export default function BasicTable() {
         setTitle(PLAYLISTS_TITLE)
         setHeaders(PLAYLIST_HEADERS)
         setTbody(
-          playlists.map(playlist => (
-            <PlaylistRow playlist={playlist}/>
+          playlists.map((playlist, ind) => (
+            <PlaylistRow
+            playlist={playlist}
+            // Inverted even - odd to compensate for starting to count from zero
+            cls={ind % 2 === 1 ? "even" : "odd"}
+            />
           ))
         )
         console.log(playlists)
