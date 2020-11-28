@@ -1,6 +1,7 @@
 import React from 'react'
 import { MENU_KEY_ARTISTS, MENU_KEY_LAST_50, MENU_KEY_METRICS_ANALYZE, MENU_KEY_METRICS_CREATE, MENU_KEY_PLAYLISTS, MENU_KEY_SONGS, MENU_KEY_TOP_SONGS } from '../../../context/MenuSelectionContext'
-import MenuItem from './MenuItem'
+import L2Item from './L2Item'
+import L1Item from './L1Item'
 
 export default function Sidebar({refreshSpotifyData}) {
   return (
@@ -23,28 +24,32 @@ export default function Sidebar({refreshSpotifyData}) {
         </div>
         <ul className="main-menu">
           <li className="l1">
-            <MenuItem
+            <L1Item
                 cls="item-l1"
                 text="Explore"
-                dataKey={MENU_KEY_PLAYLISTS}
+                dataKeyList={[
+                  MENU_KEY_PLAYLISTS,
+                  MENU_KEY_ARTISTS,
+                  MENU_KEY_SONGS,
+                ]}
             />
             <ul className="menu-l2">
               <li className="l2">
-                <MenuItem
+                <L2Item
                   cls="item-l2"
                   text="Playlists"
                   dataKey={MENU_KEY_PLAYLISTS}
                 />
               </li>
               <li className="l2">
-                <MenuItem
+                <L2Item
                   cls="item-l2"
                   text="Artists"
                   dataKey={MENU_KEY_ARTISTS}
                 />
               </li>
               <li className="l2">
-                <MenuItem
+                <L2Item
                   cls="item-l2"
                   text="Songs"
                   dataKey={MENU_KEY_SONGS}
@@ -53,35 +58,38 @@ export default function Sidebar({refreshSpotifyData}) {
             </ul>
           </li>
           <li className="l1">
-            <MenuItem
+            <L1Item
                   cls="item-l1 has-action"
                   text="Top tracks"
-                  dataKey={MENU_KEY_TOP_SONGS}
+                  dataKeyList={[MENU_KEY_TOP_SONGS]}
             />
           </li>
           <li className="l1">
-            <MenuItem
+            <L1Item
                 cls="item-l1 has-action"
                 text="Last 50"
-                dataKey={MENU_KEY_LAST_50}
+                dataKeyList={[MENU_KEY_LAST_50]}
             />
           </li>
           <li className="l1">
-            <MenuItem
+            <L1Item
                 cls="item-l1"
                 text="Musical metrics"
-                dataKey={MENU_KEY_METRICS_ANALYZE}
+                dataKeyList={[
+                  MENU_KEY_METRICS_ANALYZE,
+                  MENU_KEY_METRICS_CREATE,
+                ]}
             />
             <ul className="menu-l2">
               <li className="l2">
-                  <MenuItem
+                  <L2Item
                     cls="item-l2"
                     text="Analize"
                     dataKey={MENU_KEY_METRICS_ANALYZE}
                   />
                 </li>
                 <li className="l2">
-                  <MenuItem
+                  <L2Item
                     cls="item-l2"
                     text="Create"
                     dataKey={MENU_KEY_METRICS_CREATE}
