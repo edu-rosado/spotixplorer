@@ -6,6 +6,8 @@ import { getExpirationTime } from '../../common'
 import { usePlaylists } from '../../context/SpotifyDataContext'
 import Sidebar from './sidebar/Sidebar'
 import DataSection from './dataSection/DataSection'
+import { useMediaQuery } from 'react-responsive'
+import { useShowSidebar } from '../../context/ShowSidebarContext'
 
 export default function Dashboard({location}) {
 
@@ -15,6 +17,11 @@ export default function Dashboard({location}) {
     const [refreshDone, setRefreshDone] = useState(false)
     const [mustRefreshSpotifyData, setMustRefreshSpotifyData] = useState(false)
 
+    const isMobile = useMediaQuery({
+        query: "(max-width: 768px)"
+    })
+    const [showSidebar, setShowSidebar] = useShowSidebar()
+    
     const [playlists, getPlaylists] = usePlaylists()
 
     // on mount: Get tokens and spotify data
@@ -120,8 +127,10 @@ export default function Dashboard({location}) {
     
     return (
         <div className="app">
-            <Sidebar refreshSpotifyData={()=>{}}/>
-            <DataSection />
+            {( !isMobile || showSidebar) ? (
+                <Sidebar refreshSpotifyData/>
+            ) : ""}
+            <DataSection/>
         </div>
     )
 }

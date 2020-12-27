@@ -7,17 +7,43 @@
   table {
     border-spacing: 0;
     width: 100%;
+    .table-top-layer.obscure {
+      background-color: rgba(128, 128, 128, 0.555);
+    }
   }
 
   .title {
     background-color: greenyellow;
+    display: flex;
+    align-items: center;
+    h2 {
+      flex-grow: 1;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .burger-menu {
+      display: none;
+      cursor: pointer;
+      padding: 1rem;
+    }
   }
 
   thead {
-    background-color: rgb(0, 71, 18);
-    color: greenyellow;
     th {
-      padding: 1rem 0;
+      background-color: rgb(0, 71, 18);
+      color: greenyellow;
+      position: sticky;
+      top: 0;
+      padding: 1rem 0.3rem;
+      cursor: pointer;
+      .header-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      span {
+        display: none;
+      }
     }
   }
 
@@ -42,5 +68,11 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .data-section .title .burger-menu {
+    display: block;
   }
 }

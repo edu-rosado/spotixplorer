@@ -16,6 +16,7 @@
     padding: 2rem 0;
     text-shadow: 0 0 10px $primary-light;
     color: beige;
+    cursor: cell;
   }
   .account-section {
     text-align: center;
@@ -25,6 +26,7 @@
     h2 {
       padding-bottom: 0.5rem;
       color: beige;
+      cursor: default;
     }
     img {
       width: 100%;
@@ -87,5 +89,14 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    top: 4rem;
+    width: 100%;
+    z-index: 1;
   }
 }

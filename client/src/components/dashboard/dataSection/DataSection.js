@@ -10,7 +10,7 @@ export default function DataSection() {
     <div className="data-section">
       {
         menuSelection.indexOf("_TABLE_") > -1 ? (
-          <BasicTable />
+          <BasicTable/>
         ) : (
           <BasicMetrics />
         )

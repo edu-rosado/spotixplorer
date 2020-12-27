@@ -4,6 +4,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Landing from './components/Landing';
 import { SpotifyDataProvider } from './context/SpotifyDataContext';
 import { MenuSelectionProvider } from './context/MenuSelectionContext';
+import { ShowSidebarProvider } from './context/ShowSidebarContext';
 
 export const LOCAL_PREFIX = "spotixplore"
 export const CLIENT_ID = "c051d36400f348d988e57b02dec4b384"
@@ -26,7 +27,9 @@ function App() {
           <Route exact path="/" component={Landing}/>
             <SpotifyDataProvider>
             <MenuSelectionProvider>
+            <ShowSidebarProvider>
               <Route path="/auth-callback" component={Dashboard}/>
+              </ShowSidebarProvider>
             </MenuSelectionProvider>
             </SpotifyDataProvider>
         </Switch>
